@@ -22,3 +22,5 @@ class AuthServices
         return null
     }
 }
+
+export const authService = new AuthServices()
