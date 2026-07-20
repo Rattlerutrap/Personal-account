@@ -6,9 +6,20 @@ export function useAuth()
 {
     const [user, setUser] = useState<User | null>(null)
 
-    const login = (credentials : UserCredentials) =>
+    const login = (credentials : UserCredentials) : boolean =>
     {
-        setUser(authService.login(credentials))
+        const foundUser = authService.login(credentials)
+
+        if (foundUser)
+        {
+            setUser(foundUser)
+            return true
+        }
+        else
+        {
+            setUser(null)
+            return false
+        }
     } 
 
     const logout = () => 

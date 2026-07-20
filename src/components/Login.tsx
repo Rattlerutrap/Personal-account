@@ -1,25 +1,32 @@
 import { useState } from "react"
 import Profile from "./Profile"
+import { useAuth } from "../hooks/useAuth"
+
+
+
 
 function Login()
 {
-    const [login, setLogin] = useState('')
+    const {user, login, logout} = useAuth()
+    const [isError, setIsError] = useState<boolean>(false)
 
     function handleLogin()
     {
-        const input = document.querySelector('#login') as HTMLInputElement | null
-        if (input)
+        const loginInput : HTMLInputElement | null = document.querySelector('#login')
+        const passwordInput : HTMLInputElement | null = document.querySelector('#password')
+        if (loginInput?.value && passwordInput?.value)
         {
-            setLogin(input.value)
+            setIsError(!login({login: loginInput.value, password: passwordInput.value}))
         }
     }
+
 
     return (
         <>
             <input placeholder="Login" id="login" type="text" required/>
             <input placeholder="Password" id="password" type="password" required />
-            <button onClick={handleLogin}>Подтвердить</button>
-            <Profile login={login} />
+            <button onClick={handleLogin}>Confirm</button>
+            {isError ? <p>Wrong login or password!</p> : user ? <Profile {...user}/> : <p>Enter login && password</p>}
         </>
     )
 }

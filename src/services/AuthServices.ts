@@ -12,7 +12,7 @@ class AuthServices
 
     login(credentials: UserCredentials) : User | null
     {
-        const userData = this.users.get(credentials.login);
+        const userData = this.users.get(credentials.login)
 
         if (userData && userData.password === credentials.password)
         {
