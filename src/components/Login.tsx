@@ -39,11 +39,14 @@ function Login() {
         <input className="login" placeholder="Login" id="login" type="text" required />
         <input className="login" placeholder="Password" id="password" type="password" required />
 
-        <button onClick={handleLogin}>Log in</button>
-        <button onClick={handleLogout}>Log out</button>
-        <button onClick={handleExampleUser}>Example user</button>
+        <div>
+          <button onClick={handleLogin}>Log in</button>
+          <button onClick={handleLogout}>Log out</button>
+          <button onClick={handleExampleUser}>Example user</button>
+        </div>
+        {isError ? <p>Wrong login or password!</p> : user ? <p>Welcome!</p> : <p>Enter login && password</p>}
       </div>
-      {isError ? <p>Wrong login or password!</p> : user ? <Profile {...user} /> : <p>Enter login && password</p>}
+      {!isError && user && <Profile {...user} />}
     </>
   )
 }

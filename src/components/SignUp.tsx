@@ -27,6 +27,18 @@ function SignUp() {
 
   }
 
+  function checkNumber(e: React.KeyboardEvent) {
+    const key = e.key
+    if (!/[0-9]/.test(key) && 
+    key !== 'Backspace' && 
+    key !== 'Delete' && 
+    key !== 'ArrowLeft' && 
+    key !== 'ArrowRight' && 
+    key !== 'Tab') {
+      e.preventDefault()
+    }
+  }
+
 
   return (
     <>
@@ -42,7 +54,7 @@ function SignUp() {
           </label>
 
           <label htmlFor="age">Age: 
-          <input className="input" id="age" type="number" name="age" required />
+          <input className="input" id="age" type="number" name="age" min={1} onKeyDown={checkNumber} required />
           </label>
 
           <label htmlFor="fname">First name: 
