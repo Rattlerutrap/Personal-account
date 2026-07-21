@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Profile from "./Profile"
 import { useAuth } from "../hooks/useAuth"
+import './styles/Login.css'
 
 
 
@@ -22,17 +23,27 @@ function Login() {
     logout()
   }
 
+  function handleExampleUser() {
+    const loginInput: HTMLInputElement | null = document.querySelector('#login')
+    const passwordInput: HTMLInputElement | null = document.querySelector('#password')
+    if (loginInput && passwordInput)
+    {
+      loginInput.value = 'example@example.com'
+      passwordInput.value ='example'
+    }
+  }
 
   return (
     <>
       <div id="login-container">
-      <input className="login" placeholder="Login" id="login" type="text" required />
-      <input className="login" placeholder="Password" id="password" type="password" required />
+        <input className="login" placeholder="Login" id="login" type="text" required />
+        <input className="login" placeholder="Password" id="password" type="password" required />
 
-      <button onClick={handleLogin}>Log in</button>
-      <button onClick={handleLogout}>Log out</button>
-      {isError ? <p>Wrong login or password!</p> : user ? <Profile {...user} /> : <p>Enter login && password</p>}
+        <button onClick={handleLogin}>Log in</button>
+        <button onClick={handleLogout}>Log out</button>
+        <button onClick={handleExampleUser}>Example user</button>
       </div>
+      {isError ? <p>Wrong login or password!</p> : user ? <Profile {...user} /> : <p>Enter login && password</p>}
     </>
   )
 }

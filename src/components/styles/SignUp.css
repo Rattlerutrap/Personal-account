@@ -4,9 +4,8 @@
   padding: 15px;
   height: 350px;
   width: 250px;
-  /* position: fixed; */
-  /* bottom: 0; */
-  /* right: 0; */
+  grid-column: 5;
+  grid-row: 3 / 5;
 }
 
 .input {

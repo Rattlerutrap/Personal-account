@@ -1,3 +1,8 @@
+#login-container {
+    grid-column: 1 / 6;
+    grid-row: 1;
+}
+
 .login {
-    display: block;
+    /* display: block; */
 }

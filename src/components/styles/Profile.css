@@ -1,0 +1,4 @@
+#profile-container {
+    grid-row: 2 / 5;
+    grid-column: 1 / 5;
+}
