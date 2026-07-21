@@ -1,5 +1,5 @@
 export interface User {
-  avatar: string | undefined
+  avatar?: string | undefined
   fname: string
   sname: string
   age: number
