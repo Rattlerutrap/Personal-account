@@ -9,12 +9,16 @@ import './styles/Login.css'
 function Login() {
   const { user, login, logout } = useAuth()
   const [isError, setIsError] = useState<boolean>(false)
+  const [loginValue, setLoginValue] = useState('')
+  const [passwordValue, setPasswordValue] = useState('')
 
   function handleLogin() {
     const loginInput: HTMLInputElement | null = document.querySelector('#login')
     const passwordInput: HTMLInputElement | null = document.querySelector('#password')
     if (loginInput?.value && passwordInput?.value) {
       setIsError(!login({ login: loginInput.value, password: passwordInput.value }))
+      setLoginValue(loginInput.value)
+      setPasswordValue(passwordInput.value)
     }
   }
 
@@ -46,7 +50,7 @@ function Login() {
         </div>
         {isError ? <p>Wrong login or password!</p> : user ? <p>Welcome!</p> : <p>Enter login && password</p>}
       </div>
-      {!isError && user && <Profile {...user} />}
+      {!isError && user && <Profile user={user} login={loginValue} />}
     </>
   )
 }
