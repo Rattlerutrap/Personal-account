@@ -10,7 +10,6 @@ function Login() {
   const { user, login, logout } = useAuth()
   const [isError, setIsError] = useState<boolean>(false)
   const [loginValue, setLoginValue] = useState('')
-  const [passwordValue, setPasswordValue] = useState('')
 
   function handleLogin() {
     const loginInput: HTMLInputElement | null = document.querySelector('#login')
@@ -18,7 +17,6 @@ function Login() {
     if (loginInput?.value && passwordInput?.value) {
       setIsError(!login({ login: loginInput.value, password: passwordInput.value }))
       setLoginValue(loginInput.value)
-      setPasswordValue(passwordInput.value)
     }
   }
 
