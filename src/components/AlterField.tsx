@@ -2,6 +2,7 @@ import type React from "react";
 import { EditUserField } from "../services/EditProfile";
 import type { User } from "../types/user.types";
 import { users } from "../users/Users";
+import './styles/AlterField.css'
 
 export default function AlterField({ fieldName, login, inputType, setUser }: { fieldName: keyof User, login: string, inputType: string, setUser: React.Dispatch<React.SetStateAction<User>> }) {
   const inputId = `${fieldName}-alter-input`
