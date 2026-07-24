@@ -4,5 +4,5 @@ This code is a simplified realization of personal account.
 - Create user
 - Sign in
 - Sign out
-- Alter user data
+- Alter user data \
 Users aren't saved, so new users are available during session.
