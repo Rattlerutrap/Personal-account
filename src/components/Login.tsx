@@ -4,8 +4,6 @@ import { useAuth } from "../hooks/useAuth"
 import './styles/Login.css'
 
 
-
-
 function Login() {
   const { user, login, logout } = useAuth()
   const [isError, setIsError] = useState<boolean>(false)

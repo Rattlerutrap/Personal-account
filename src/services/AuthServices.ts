@@ -1,13 +1,12 @@
 import type { User } from "../types/user.types";
-import { users } from "../users/Users";
 
 
 class AuthServices {
   login(login: string, password: string): User | null {
-    const userData = users.get(login)
+    const userData = localStorage.getItem(login)
     
-    if (userData && userData.password === password) {
-      return userData
+    if (userData && JSON.parse(userData).password === password) {
+      return JSON.parse(userData)
     }
 
     return null
