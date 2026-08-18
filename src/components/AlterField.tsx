@@ -1,33 +1,34 @@
 import type React from "react";
-import { EditUserField } from "../services/EditProfile";
+import EditProfile from "../services/EditProfile";
 import type { User } from "../types/user.types";
-import { users } from "../users/Users";
 import './styles/AlterField.css'
 
 export default function AlterField({ fieldName, login, inputType, setUser }: { fieldName: keyof User, login: string, inputType: string, setUser: React.Dispatch<React.SetStateAction<User>> }) {
   const inputId = `${fieldName}-alter-input`
   function handleAlterButton() {
-    const user = users.get(login)
     const inputAlter: HTMLInputElement | null = document.querySelector(`#${inputId}`)
 
-    if (user && inputAlter) {
+    if (inputAlter) {
+      let updatedUser = null
       if (inputType === "file" && inputAlter.files && inputAlter.files[0]) {
-        const file = inputAlter.files[0];
-        const reader = new FileReader();
+        const file = inputAlter.files[0]
+        const reader = new FileReader()
 
         reader.onload = (e) => {
           if (e.target?.result) {
-            const updatedUser = EditUserField(user, fieldName, e.target.result as string);
-            users.set(login, updatedUser);
-            setUser(updatedUser);
+            updatedUser = EditProfile(login, fieldName, e.target.result as string);
+            if (updatedUser) {
+              setUser(updatedUser)
+            }
           }
         };
 
         reader.readAsDataURL(file);
       } else {
-        const updatedUser = EditUserField(user, fieldName, inputAlter.value);
-        users.set(login, updatedUser);
-        setUser(updatedUser);
+        updatedUser = EditProfile(login, fieldName, inputAlter.value);
+        if (updatedUser) {
+          setUser(updatedUser)
+        }
       }
     }
   }
