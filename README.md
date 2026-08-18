@@ -6,4 +6,4 @@ This code is a simplified realization of personal account.
 - Sign out
 - Alter user data 
   
-Users aren't saved, so new users are available during session.
+Users are saved in localStorage.
