@@ -17,16 +17,16 @@ export default function AlterField({ fieldName, login, inputType, setUser }: { f
 
         reader.onload = (e) => {
           if (e.target?.result) {
-            const updatedUser = EditUserField(user.user, fieldName, e.target.result as string);
-            users.set(login, { ...user, user: updatedUser });
+            const updatedUser = EditUserField(user, fieldName, e.target.result as string);
+            users.set(login, updatedUser);
             setUser(updatedUser);
           }
         };
 
         reader.readAsDataURL(file);
       } else {
-        const updatedUser = EditUserField(user.user, fieldName, inputAlter.value);
-        users.set(login, { ...user, user: updatedUser });
+        const updatedUser = EditUserField(user, fieldName, inputAlter.value);
+        users.set(login, updatedUser);
         setUser(updatedUser);
       }
     }

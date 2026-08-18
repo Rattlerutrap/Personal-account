@@ -1,13 +1,13 @@
-import type { User, UserCredentials } from "../types/user.types";
+import type { User } from "../types/user.types";
 import { users } from "../users/Users";
 
 
 class AuthServices {
-  login(credentials: UserCredentials): User | null {
-    const userData = users.get(credentials.login)
-
-    if (userData && userData.password === credentials.password) {
-      return userData.user
+  login(login: string, password: string): User | null {
+    const userData = users.get(login)
+    
+    if (userData && userData.password === password) {
+      return userData
     }
 
     return null

@@ -20,8 +20,8 @@ function SignUp() {
       typeof age === 'number' &&
       typeof fname === 'string' &&
       typeof sname === 'string') {
-      setUserCreated(CreateUser({ password: password, login: login },
-        { age: age, fname: fname, sname: sname }))
+      setUserCreated(CreateUser(login,
+        { password: password, age: age, fname: fname, sname: sname }))
       e.currentTarget.reset
     }
 

@@ -15,7 +15,7 @@ function Login() {
     const loginInput: HTMLInputElement | null = document.querySelector('#login')
     const passwordInput: HTMLInputElement | null = document.querySelector('#password')
     if (loginInput?.value && passwordInput?.value) {
-      setIsError(!login({ login: loginInput.value, password: passwordInput.value }))
+      setIsError(!login(loginInput.value, passwordInput.value))
       setLoginValue(loginInput.value)
     }
   }
