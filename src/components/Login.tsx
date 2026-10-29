@@ -1,26 +1,34 @@
 import { useState } from "react"
 import Profile from "./Profile"
-import { useAuth } from "../hooks/useAuth"
+import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { loggedIn, logout, selectUser, selectLogin } from '../store/authSlice'
+import { authService } from '../services/AuthServices'
 import './styles/Login.css'
 
 
 function Login() {
-  const { user, login, logout } = useAuth()
+  const dispatch = useAppDispatch()
+  const user = useAppSelector(selectUser)
+  const currentLogin = useAppSelector(selectLogin)
   const [isError, setIsError] = useState<boolean>(false)
-  const [loginValue, setLoginValue] = useState('')
 
   function handleLogin() {
     const loginInput: HTMLInputElement | null = document.querySelector('#login')
     const passwordInput: HTMLInputElement | null = document.querySelector('#password')
-    if (loginInput?.value && passwordInput?.value) {
-      setIsError(!login(loginInput.value, passwordInput.value))
-      setLoginValue(loginInput.value)
+    if (!loginInput?.value || !passwordInput?.value) return
+
+    const foundUser = authService.login(loginInput.value, passwordInput.value)
+    if (foundUser) {
+      dispatch(loggedIn({ user: foundUser, login: loginInput.value }))
+      setIsError(false)
+    } else {
+      setIsError(true)
     }
   }
 
   function handleLogout() {
     setIsError(false)
-    logout()
+    dispatch(logout())
   }
 
   function handleExampleUser() {
@@ -46,7 +54,7 @@ function Login() {
         </div>
         {isError ? <p>Wrong login or password!</p> : user ? <p>Welcome!</p> : <p>Enter login && password</p>}
       </div>
-      {!isError && user && <Profile user={user} login={loginValue} />}
+      {!isError && user && currentLogin && <Profile user={user} login={currentLogin}  />}
     </>
   )
 }
