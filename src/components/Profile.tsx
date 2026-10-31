@@ -1,27 +1,30 @@
-import { useState } from "react"
-import type { User } from "../types/user.types"
+import { useAppSelector } from '../store/hooks'
+import { selectUser, selectLogin } from '../store/authSlice'
 import AlterField from "./AlterField"
 import './styles/Profile.css'
 
-function Profile({ user, login }: { user: User, login: string }) {
+function Profile() {
 
-  const [showUser, setShowUser] = useState<User>(user)
-
+  const user = useAppSelector(selectUser)
+  const currentLogin = useAppSelector(selectLogin)
+  
   return (
     <>
+    {user && currentLogin &&
       <div id="profile-container">
         <div id='profile-data-container'>
-          <img src={showUser.avatar} alt='avatar'></img>
-          <p>First name: {showUser.fname}</p>
-          <p>Second name: {showUser.sname}</p>
-          <p>Age: {showUser.age}</p></div>
+          <img src={user.avatar} alt='avatar'></img>
+          <p>First name: {user.fname}</p>
+          <p>Second name: {user.sname}</p>
+          <p>Age: {user.age}</p></div>
         <div id="profile-data-alter-container">
-          <AlterField fieldName="avatar" login={login} inputType="file" setUser={setShowUser} />
-          <AlterField fieldName="fname" login={login} inputType="text" setUser={setShowUser} />
-          <AlterField fieldName="sname" login={login} inputType="text" setUser={setShowUser} />
-          <AlterField fieldName="age" login={login} inputType="number" setUser={setShowUser} />
+          <AlterField fieldName="avatar" login={currentLogin} inputType="file" />
+          <AlterField fieldName="fname" login={currentLogin} inputType="text"/>
+          <AlterField fieldName="sname" login={currentLogin} inputType="text"/>
+          <AlterField fieldName="age" login={currentLogin} inputType="number"/>
         </div>
       </div>
+    }
     </>
   )
 }

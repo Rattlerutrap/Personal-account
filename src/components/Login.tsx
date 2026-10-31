@@ -1,7 +1,6 @@
 import { useState } from "react"
-import Profile from "./Profile"
 import { useAppDispatch, useAppSelector } from '../store/hooks'
-import { loggedIn, logout, selectUser, selectLogin } from '../store/authSlice'
+import { loggedIn, logout, selectUser } from '../store/authSlice'
 import { authService } from '../services/AuthServices'
 import './styles/Login.css'
 
@@ -9,7 +8,6 @@ import './styles/Login.css'
 function Login() {
   const dispatch = useAppDispatch()
   const user = useAppSelector(selectUser)
-  const currentLogin = useAppSelector(selectLogin)
   const [isError, setIsError] = useState<boolean>(false)
 
   function handleLogin() {
@@ -52,9 +50,8 @@ function Login() {
           <button onClick={handleLogout}>Log out</button>
           <button onClick={handleExampleUser}>Example user</button>
         </div>
-        {isError ? <p>Wrong login or password!</p> : user ? <p>Welcome!</p> : <p>Enter login && password</p>}
+        {isError ? <p>Wrong login or password!</p> : user ? <p> Welcome, {user.fname}! </p> : <p>Enter login && password</p>}
       </div>
-      {!isError && user && currentLogin && <Profile user={user} login={currentLogin}  />}
     </>
   )
 }

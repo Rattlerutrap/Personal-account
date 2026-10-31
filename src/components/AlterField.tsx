@@ -1,9 +1,11 @@
-import type React from "react";
+import { useAppDispatch } from "../store/hooks";
+import { updateUser } from "../store/authSlice";
 import EditProfile from "../services/EditProfile";
 import type { User } from "../types/user.types";
 import './styles/AlterField.css'
 
-export default function AlterField({ fieldName, login, inputType, setUser }: { fieldName: keyof User, login: string, inputType: string, setUser: React.Dispatch<React.SetStateAction<User>> }) {
+export default function AlterField({ fieldName, login, inputType }: { fieldName: keyof User, login: string, inputType: string }) {
+  const dispatch = useAppDispatch()
   const inputId = `${fieldName}-alter-input`
   function handleAlterButton() {
     const inputAlter: HTMLInputElement | null = document.querySelector(`#${inputId}`)
@@ -18,7 +20,7 @@ export default function AlterField({ fieldName, login, inputType, setUser }: { f
           if (e.target?.result) {
             updatedUser = EditProfile(login, fieldName, e.target.result as string);
             if (updatedUser) {
-              setUser(updatedUser)
+              dispatch(updateUser(updatedUser))
             }
           }
         };
@@ -27,7 +29,7 @@ export default function AlterField({ fieldName, login, inputType, setUser }: { f
       } else {
         updatedUser = EditProfile(login, fieldName, inputAlter.value);
         if (updatedUser) {
-          setUser(updatedUser)
+          dispatch(updateUser(updatedUser))
         }
       }
     }
