@@ -1,3 +1,5 @@
+import { Provider as ChakraProvider } from "@/components/ui/provider"
+
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import Profile from './components/Profile'
@@ -7,11 +9,13 @@ function App() {
 
   return (
     <>
-      <div id='main'>
-        <Login/>
-        <Profile/>
-        <SignUp/>
-      </div>
+     <ChakraProvider>
+        <div id='main'>
+          <Login/>
+          <Profile/>
+          <SignUp/>
+        </div>
+      </ChakraProvider>
     </>
   )
 }
